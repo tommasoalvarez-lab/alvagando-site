@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Richiesta inviata — Alvagando</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #35543F; color: #F6F1E4; font-family: 'Work Sans', sans-serif; line-height: 1.6; min-height: 100vh; }
+  a { color: #E4B65A; text-decoration: none; }
+  a:hover { color: #F6F1E4; }
+</style>
+</head>
+<body>
+
+<div style="padding:22px 24px;">
+  <div style="max-width:1100px;margin:0 auto;font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:0.02em;">ALVA<span style="color:#E4B65A;">GANDO</span></div>
+</div>
+
+<div style="min-height:70vh;display:flex;align-items:center;justify-content:center;padding:40px 24px;">
+  <div style="max-width:420px;text-align:center;">
+    <div style="font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#E4B65A;">Richiesta inviata</div>
+    <div id="heading" style="font-family:'Anton',sans-serif;text-transform:uppercase;font-size:1.8rem;line-height:1.1;margin-top:14px;color:#F6F1E4;">Grazie.</div>
+    <p style="color:#D9D2BF;margin:14px auto 0;max-width:340px;">Ti ricontatto entro 24 ore al numero che mi hai lasciato, per fissare la consulenza.</p>
+    <a href="/" style="display:inline-block;margin-top:24px;border:1px solid rgba(246,241,228,0.25);color:#F6F1E4;padding:12px 24px;border-radius:999px;font-size:0.92rem;">Intanto, guarda gli itinerari</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Stesso ID messo in consulenza/index.html.
+  var META_PIXEL_ID = '';
+
+  var params = new URLSearchParams(location.search);
+  var nome = (params.get('nome') || '').trim();
+  var dest = params.get('dest') || '';
+  if (nome) {
+    document.getElementById('heading').textContent = 'Grazie, ' + nome + '.';
+  }
+
+  var consent = null;
+  try { consent = localStorage.getItem('alvagando_cookie_consent'); } catch (e) {}
+
+  if (META_PIXEL_ID && consent === 'yes') {
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('init', META_PIXEL_ID);
+    window.fbq('track', 'Lead', { content_name: 'Consulenza gratuita', content_category: dest });
+  }
+})();
+</script>
+
+</body>
+</html>
